@@ -1,0 +1,27 @@
+﻿@page
+@model AddMedicineModel
+@{
+    ViewData["Title"] = "Add Medicine";
+}
+
+<h1>Add New Medicine</h1>
+
+<form method="post">
+    <label asp-for="NewMedicine.Name">Name:</label>
+    <input asp-for="NewMedicine.Name" />
+    <span asp-validation-for="NewMedicine.Name"></span><br>
+
+    <label asp-for="NewMedicine.Manufacturer">Manufacturer:</label>
+    <input asp-for="NewMedicine.Manufacturer" />
+    <span asp-validation-for="NewMedicine.Manufacturer"></span><br>
+
+    <label asp-for="NewMedicine.Price">Price:</label>
+    <input asp-for="NewMedicine.Price" type="number" step="0.01" />
+    <span asp-validation-for="NewMedicine.Price"></span><br>
+
+    <label asp-for="NewMedicine.StockQuantity">Stock Quantity:</label>
+    <input asp-for="NewMedicine.StockQuantity" type="number" />
+    <span asp-validation-for="NewMedicine.StockQuantity"></span><br>
+
+    <button type="submit">Add Medicine</button>
+</form>
