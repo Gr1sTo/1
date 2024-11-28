@@ -1,0 +1,43 @@
+﻿@page
+@model DatabaseViewModel
+@{
+    ViewData["Title"] = "Database Viewer";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-4">
+    <h1 class="mb-4">Database Viewer</h1>
+
+    <table class="table table-striped table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th>Table Name</th>
+                <th>Record Count</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Medicines</td>
+                <td>@Model.MedicinesCount</td>
+                <td>
+                    <a asp-page="/Medicines/Index" class="btn btn-primary btn-sm">View Medicines</a>
+                </td>
+            </tr>
+            <tr>
+                <td>Customers</td>
+                <td>@Model.CustomersCount</td>
+                <td>
+                    <a asp-page="/Customers/Index" class="btn btn-primary btn-sm">View Customers</a>
+                </td>
+            </tr>
+            <tr>
+                <td>Orders</td>
+                <td>@Model.OrdersCount</td>
+                <td>
+                    <a asp-page="/Orders/Index" class="btn btn-primary btn-sm">View Orders</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,43 @@
+﻿@page
+@model MedicinesIndexModel
+@{
+    ViewData["Title"] = "Medicines List";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Medicines</h1>
+
+<p>
+    <a asp-page="./Create" class="btn btn-primary">Create New Medicine</a>
+</p>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Manufacturer</th>
+            <th>Price</th>
+            <th>Stock Quantity</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Medicines)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.Manufacturer</td>
+                <td>@item.Price</td>
+                <td>@item.StockQuantity</td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.Id" class="btn btn-warning">Edit</a>
+                    <a asp-page="./Details" asp-route-id="@item.Id" class="btn btn-info">Details</a>
+                    <a asp-page="./Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<p>
+    <a asp-page="/DatabaseView" class="btn btn-secondary mt-3">Back to DatabaseView</a>
+</p>
