@@ -1,0 +1,40 @@
+﻿@page
+@model OrdersIndexModel
+@{
+    ViewData["Title"] = "Orders List";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Orders</h1>
+
+<p>
+    <a asp-page="./Create" class="btn btn-primary">Create New Order</a>
+</p>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Customer ID</th>
+            <th>Order Date</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Orders)
+        {
+            <tr>
+                <td>@item.CustomerId</td>
+                <td>@item.OrderDate.ToShortDateString()</td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.Id" class="btn btn-warning">Edit</a>
+                    <form method="post" asp-page-handler="Delete" asp-route-id="@item.Id" style="display:inline;">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<p>
+    <a asp-page="/DatabaseView" class="btn btn-secondary mt-3">Back to DatabaseView</a>
+</p>

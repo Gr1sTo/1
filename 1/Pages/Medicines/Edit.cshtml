@@ -1,33 +1,31 @@
-﻿@page
-@model _1.Pages.Medicines.CreateModel
+﻿@page "{id:int}"
+@model _1.Pages.Medicines.EditModel
 @{
-    ViewData["Title"] = "Create Medicine";
+    ViewData["Title"] = "Edit Medicine";
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
-<h1>Create Medicine</h1>
+<h1>Edit Medicine</h1>
 
 <form method="post">
+    <input type="hidden" asp-for="Medicine.Id" />
     <div class="form-group">
         <label asp-for="Medicine.Name" class="control-label"></label>
         <input asp-for="Medicine.Name" class="form-control" />
-        <span asp-validation-for="Medicine.Name" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="Medicine.Manufacturer" class="control-label"></label>
         <input asp-for="Medicine.Manufacturer" class="form-control" />
-        <span asp-validation-for="Medicine.Manufacturer" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="Medicine.Price" class="control-label"></label>
         <input asp-for="Medicine.Price" class="form-control" />
-        <span asp-validation-for="Medicine.Price" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="Medicine.StockQuantity" class="control-label"></label>
         <input asp-for="Medicine.StockQuantity" class="form-control" />
-        <span asp-validation-for="Medicine.StockQuantity" class="text-danger"></span>
     </div>
     <button type="submit" class="btn btn-primary">Save</button>
-    <a asp-page="./Index" class="btn btn-secondary">Back to List</a>
+    <a asp-page="./Index" class="btn btn-secondary">Cancel</a>
 </form>
+

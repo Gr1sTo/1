@@ -1,0 +1,22 @@
+﻿@page "{id:int}"
+@model EditModel
+@{
+    ViewData["Title"] = "Edit Order";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Edit Order</h1>
+
+<form method="post">
+    <input type="hidden" asp-for="Order.Id" />
+    <div class="form-group">
+        <label asp-for="Order.CustomerId" class="control-label"></label>
+        <input asp-for="Order.CustomerId" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Order.OrderDate" class="control-label"></label>
+        <input asp-for="Order.OrderDate" class="form-control" type="date" />
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a asp-page="./Index" class="btn btn-secondary">Cancel</a>
+</form>

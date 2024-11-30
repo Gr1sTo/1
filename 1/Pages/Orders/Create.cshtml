@@ -1,0 +1,40 @@
+﻿@page
+@model _1.Pages.Orders.CreateModel
+@{
+    ViewData["Title"] = "Create Order";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Create Order</h1>
+
+<form method="post">
+    <div class="form-group">
+        <label asp-for="Order.CustomerId" class="control-label">Customer</label>
+        <select asp-for="Order.CustomerId" class="form-control">
+            <option value="">Select Customer</option>
+            @foreach (var customer in Model.Customers)
+            {
+                <option value="@customer.Id">@customer.FullName</option>
+            }
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>Medicines</label>
+        @foreach (var medicine in Model.Medicines)
+        {
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="SelectedMedicines" value="@medicine.Id" />
+                <label class="form-check-label">@medicine.Name</label>
+            </div>
+        }
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Order.OrderDate" class="control-label">Order Date</label>
+        <input asp-for="Order.OrderDate" class="form-control" type="date" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a asp-page="/Orders/Index" class="btn btn-secondary">Cancel</a>
+</form>

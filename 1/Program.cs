@@ -29,6 +29,11 @@ using (var scope = app.Services.CreateScope())
     //DbInitializer.Initialize(context);
 }
 
+app.MapGet("/", async context =>
+{
+    context.Response.Redirect("/DatabaseView");
+});
+
 app.UseMiddleware<LoggingMiddleware>();
 
 app.UseHttpsRedirection();
@@ -40,10 +45,5 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapRazorPages();
-
-app.MapGet("/", async context =>
-{
-    context.Response.Redirect("/DatabaseView");
-});
 
 app.Run();

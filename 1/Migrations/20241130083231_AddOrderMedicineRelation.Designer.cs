@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using _1.Data;
 
@@ -11,9 +12,11 @@ using _1.Data;
 namespace _1.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241130083231_AddOrderMedicineRelation")]
+    partial class AddOrderMedicineRelation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,21 +24,6 @@ namespace _1.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("MedicineOrder", b =>
-                {
-                    b.Property<int>("MedicinesId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("OrderId")
-                        .HasColumnType("int");
-
-                    b.HasKey("MedicinesId", "OrderId");
-
-                    b.HasIndex("OrderId");
-
-                    b.ToTable("OrderMedicines", (string)null);
-                });
 
             modelBuilder.Entity("_1.Models.Customer", b =>
                 {
@@ -74,6 +62,9 @@ namespace _1.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("OrderId")
+                        .HasColumnType("int");
+
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18, 2)");
 
@@ -81,6 +72,8 @@ namespace _1.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("OrderId");
 
                     b.ToTable("Medicines");
                 });
@@ -106,19 +99,14 @@ namespace _1.Migrations
                     b.ToTable("Orders");
                 });
 
-            modelBuilder.Entity("MedicineOrder", b =>
+            modelBuilder.Entity("_1.Models.Medicine", b =>
                 {
-                    b.HasOne("_1.Models.Medicine", null)
-                        .WithMany()
-                        .HasForeignKey("MedicinesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("_1.Models.Order", null)
-                        .WithMany()
+                    b.HasOne("_1.Models.Order", "Order")
+                        .WithMany("Medicines")
                         .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.Navigation("Order");
                 });
 
             modelBuilder.Entity("_1.Models.Order", b =>
@@ -135,6 +123,11 @@ namespace _1.Migrations
             modelBuilder.Entity("_1.Models.Customer", b =>
                 {
                     b.Navigation("Orders");
+                });
+
+            modelBuilder.Entity("_1.Models.Order", b =>
+                {
+                    b.Navigation("Medicines");
                 });
 #pragma warning restore 612, 618
         }

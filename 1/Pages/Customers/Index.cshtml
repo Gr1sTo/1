@@ -1,0 +1,59 @@
+﻿@page
+@model _1.Pages.Customers.CustomersIndexModel
+@{
+    ViewData["Title"] = "Customers List";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Customers</h1>
+<p>
+    <a asp-page="./Create" class="btn btn-primary">Create New Customer</a>
+</p>
+<form method="get">
+    <input type="text" name="SearchTerm" value="@Model.SearchTerm" placeholder="Search customers..." class="form-control mb-2" />
+    <button type="submit" class="btn btn-primary">Search</button>
+</form>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>
+                <a asp-route-SortOrder="@(Model.SortOrder == "name_desc" ? "name_asc" : "name_desc")">Name</a>
+            </th>
+            <th>
+                <a asp-route-SortOrder="@(Model.SortOrder == "phone_desc" ? "phone_asc" : "phone_desc")">Phone Number</a>
+            </th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var customer in Model.Customers)
+        {
+            <tr>
+                <td>@customer.FullName</td>
+                <td>@customer.PhoneNumber</td>
+                    <td>
+                        <a asp-page="./Edit" asp-route-id="@customer.Id" class="btn btn-warning">Edit</a>
+                        <form method="post" asp-page-handler="Delete" asp-route-id="@customer.Id" style="display:inline;">
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div>
+    @if (Model.Customers.HasPreviousPage)
+    {
+        <a asp-route-PageIndex="@(Model.Customers.PageIndex - 1)">Previous</a>
+    }
+
+    @if (Model.Customers.HasNextPage)
+    {
+        <a asp-route-PageIndex="@(Model.Customers.PageIndex + 1)">Next</a>
+    }
+</div>
+<p>
+    <a asp-page="/DatabaseView" class="btn btn-secondary">Back to DatabaseView</a>
+</p>

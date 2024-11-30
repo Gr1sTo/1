@@ -41,7 +41,7 @@ namespace _1.Controllers
         // POST: Medicines/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Manufacturer,Price,StockQuantity")] Medicine medicine)
+        public async Task<IActionResult> Create([Bind("Name,Manufacturer,Price,StockQuantity")] Medicine medicine)
         {
             if (ModelState.IsValid)
             {

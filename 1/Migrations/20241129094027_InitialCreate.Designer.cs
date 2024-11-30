@@ -12,15 +12,15 @@ using _1.Data;
 namespace _1.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241002125552_init")]
-    partial class init
+    [Migration("20241129094027_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.8")
+                .HasAnnotation("ProductVersion", "9.0.0")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -66,7 +66,7 @@ namespace _1.Migrations
                         .HasColumnType("int");
 
                     b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18, 2)");
 
                     b.Property<int>("StockQuantity")
                         .HasColumnType("int");
@@ -94,6 +94,8 @@ namespace _1.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CustomerId");
+
                     b.ToTable("Orders");
                 });
 
@@ -102,6 +104,22 @@ namespace _1.Migrations
                     b.HasOne("_1.Models.Order", null)
                         .WithMany("Medicines")
                         .HasForeignKey("OrderId");
+                });
+
+            modelBuilder.Entity("_1.Models.Order", b =>
+                {
+                    b.HasOne("_1.Models.Customer", "Customer")
+                        .WithMany("Orders")
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Customer");
+                });
+
+            modelBuilder.Entity("_1.Models.Customer", b =>
+                {
+                    b.Navigation("Orders");
                 });
 
             modelBuilder.Entity("_1.Models.Order", b =>

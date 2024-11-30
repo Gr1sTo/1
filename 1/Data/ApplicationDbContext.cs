@@ -18,6 +18,15 @@ namespace _1.Data
                 .HasOne(o => o.Customer)
                 .WithMany(c => c.Orders)
                 .HasForeignKey(o => o.CustomerId);
+           
+            modelBuilder.Entity<Order>()
+                .HasMany(o => o.Medicines)
+                .WithMany()
+                .UsingEntity(j => j.ToTable("OrderMedicines"));
+
+            modelBuilder.Entity<Medicine>()
+                .Property(m => m.Price)
+                .HasColumnType("decimal(18, 2)");
 
             base.OnModelCreating(modelBuilder);
         }

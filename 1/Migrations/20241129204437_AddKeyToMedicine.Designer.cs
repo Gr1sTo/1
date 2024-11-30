@@ -12,8 +12,8 @@ using _1.Data;
 namespace _1.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241127213537_AddCustomerAndOrderRelations")]
-    partial class AddCustomerAndOrderRelations
+    [Migration("20241129204437_AddKeyToMedicine")]
+    partial class AddKeyToMedicine
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -66,7 +66,7 @@ namespace _1.Migrations
                         .HasColumnType("int");
 
                     b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18, 2)");
 
                     b.Property<int>("StockQuantity")
                         .HasColumnType("int");
