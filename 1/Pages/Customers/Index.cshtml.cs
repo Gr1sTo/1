@@ -5,9 +5,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace _1.Pages.Customers
 {
+    [Authorize]
     public class CustomersIndexModel : PageModel
     {
         private readonly ApplicationDbContext _context;

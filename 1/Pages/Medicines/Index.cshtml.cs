@@ -4,9 +4,11 @@ using _1.Helpers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace _1.Pages.Medicines
 {
+    [Authorize]
     public class MedicinesIndexModel : PageModel
     {
         private readonly ApplicationDbContext _context;

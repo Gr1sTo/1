@@ -1,9 +1,10 @@
 ﻿using _1.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace _1.Data
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext
     {
         public DbSet<Medicine> Medicines { get; set; }
         public DbSet<Customer> Customers { get; set; }

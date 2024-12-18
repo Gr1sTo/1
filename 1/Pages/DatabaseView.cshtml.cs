@@ -1,8 +1,10 @@
 using _1.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace _1.Pages
 {
+    [Authorize]
     public class DatabaseViewModel : PageModel
     {
         private readonly ApplicationDbContext _context;

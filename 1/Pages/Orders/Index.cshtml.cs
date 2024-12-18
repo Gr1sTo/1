@@ -1,11 +1,13 @@
 ﻿using _1.Data;
 using _1.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
 namespace _1.Pages.Orders
 {
+    [Authorize]
     public class OrdersIndexModel : PageModel
     {
         private readonly ApplicationDbContext _context;
